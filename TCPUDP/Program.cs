@@ -12,7 +12,7 @@ namespace TCPUDP
     {
         static async Task Main(string[] args)
         {
-            var ips = new List<IPAddress>();//142.250.150.109
+            var ips = new List<IPAddress>();//142.250.150.1092
             var startIp = ReverseIp("5.165.229.96");
             var endIp = ReverseIp("5.165.229.103");
             var startParsedIp = IPAddress.Parse(startIp);
