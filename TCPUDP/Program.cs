@@ -12,9 +12,9 @@ namespace TCPUDP
     {
         static async Task Main(string[] args)
         {
-            var ips = new List<IPAddress>();
-            var startIp = "0.8.8.8";
-            var endIp = "8.8.8.8";
+            var ips = new List<IPAddress>();//142.250.150.109
+            var startIp = ReverseIp("5.165.229.96");
+            var endIp = ReverseIp("5.165.229.103");
             var startParsedIp = IPAddress.Parse(startIp);
             var endParsedIp = IPAddress.Parse(endIp);
             var start = startParsedIp.GetAddressBytes();
@@ -30,13 +30,19 @@ namespace TCPUDP
 
             //ips = new List<IPAddress>() { IPAddress.Parse("87.240.139.193"), IPAddress.Parse("87.240.139.194"), IPAddress.Parse("87.240.139.195") };
 
-            var tcpPorts = Enumerable.Range(0, 800).ToArray();
-            var udpPorts = Enumerable.Range(0, 800).ToArray();
+            var tcpPorts = Enumerable.Range(1, 4000).ToArray();
+            var udpPorts = Enumerable.Range(1, 4000).ToArray();
             foreach (var ip in ips)
             {
                 await Scanner.ScanTCP(ip, tcpPorts);
                 await Scanner.ScanUDP(ip, udpPorts);
             }
+        }
+
+        public static string ReverseIp(string ip)
+        {
+            var spl = ip.Split('.');
+            return $"{spl[3]}.{spl[2]}.{spl[1]}.{spl[0]}";
         }
         
         public static long FromBytes(byte[] vs)
