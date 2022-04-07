@@ -120,11 +120,20 @@ namespace TCPUDP
             {
                 
             }
-            if (buffer.Length > 3)
+            if (buffer.Length > 34 && buffer[34] == 3)
+            {
+                Console.WriteLine("PORT IS CLOSED!!!");
+            }
+            else if (buffer.Length > 3)
             {
                 if (buffer[0] == 33 && buffer[1] == 2)
                 {
                     Console.WriteLine($"{ipPort} We have sntp!");
+                }
+                else
+                {
+                    Console.WriteLine("UDP return:");
+                    Console.WriteLine(Encoding.ASCII.GetString(buffer));
                 }
             }
         }

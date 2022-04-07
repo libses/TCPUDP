@@ -12,9 +12,11 @@ namespace TCPUDP
     {
         static async Task Main(string[] args)
         {
-            var ips = new List<IPAddress>();//142.250.150.1092
-            var startIp = ReverseIp("5.165.229.96");
-            var endIp = ReverseIp("5.165.229.103");
+            var ips = new List<IPAddress>();
+            Console.WriteLine("Write first IP in range");
+            var startIp = ReverseIp(Console.ReadLine());
+            Console.WriteLine("Write last IP in range");
+            var endIp = ReverseIp(Console.ReadLine());
             var startParsedIp = IPAddress.Parse(startIp);
             var endParsedIp = IPAddress.Parse(endIp);
             var start = startParsedIp.GetAddressBytes();
@@ -29,9 +31,12 @@ namespace TCPUDP
             }
 
             //ips = new List<IPAddress>() { IPAddress.Parse("87.240.139.193"), IPAddress.Parse("87.240.139.194"), IPAddress.Parse("87.240.139.195") };
-
-            var tcpPorts = Enumerable.Range(1, 4000).ToArray();
-            var udpPorts = Enumerable.Range(1, 4000).ToArray();
+            Console.WriteLine("Write first port in range");
+            var fPort = int.Parse(Console.ReadLine());
+            Console.WriteLine("Write last port in range");
+            var sPort = int.Parse(Console.ReadLine()) + 1;
+            var tcpPorts = Enumerable.Range(fPort, sPort).ToArray();
+            var udpPorts = Enumerable.Range(fPort, sPort).ToArray();
             foreach (var ip in ips)
             {
                 await Scanner.ScanTCP(ip, tcpPorts);
